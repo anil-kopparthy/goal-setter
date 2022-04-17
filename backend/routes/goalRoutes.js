@@ -7,15 +7,17 @@ const {
   deleteGoals
 } = require('../controllers/goalController')
 
+const { protect } = require('../middleware/authMiddleware')
+
 //shortcut for route chaining
 // router.route('/').get(getGoals).post(setGoals)
 
-router.get('/', getGoals)
+router.get('/', protect, getGoals)
 
-router.post('/', setGoals)
+router.post('/', protect, setGoals)
 
-router.put('/:id', updateGoals)
+router.put('/:id', protect, updateGoals)
 
-router.delete('/:id', deleteGoals)
+router.delete('/:id', protect, deleteGoals)
 
 module.exports = router
